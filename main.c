@@ -1,6 +1,6 @@
-#include <stdio.h>
-#include <stdint.h>
-#include <string.h>
+#include "gpio.h"
+#include "usart1.h"
+
 
 void SystemInit(void){
 
