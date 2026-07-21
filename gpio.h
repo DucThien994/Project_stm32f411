@@ -1,16 +1,13 @@
 #include <stdint.h>
 
-#define GPIOB_BASE_ADDR (*(volatile uint32_t*)(0x40020400))
-#define GPIOA_BASE_ADDR (*(volatile uint32_t*)(0x40020000))
-#define GPIOC_BASE_ADDR (*(volatile uint32_t*)(0x40020800))
-#define GPIOD_BASE_ADDR (*(volatile uint32_t*)(0x40020C00))
-#define I2C1_BASE_ADDR (*(volatile uint32_t*)(0x40005400))
-#define I2C2_BASE_ADDR (*(volatile uint32_t*)(0x40005800))
-#define I2C3_BASE_ADDR (*(volatile uint32_t*)(0x40005C00))
-#define DMA1_BASE_ADDR (*(volatile uint32_t*)(0x40026000))
-#define EXTI_BASE_ADDR (*(volatile uint32_t*)(0x40013C00))
-#define SPI1_BASE_ADDR (*(volatile uint32_t*)(0x40013000))
-#define RCC_BASE_ADDR (*(volatile uint32_t*)(0x40023800))
+#define GPIOB_BASE_ADDR 0x40020400
+#define GPIOA_BASE_ADDR 0x40020000
+#define GPIOC_BASE_ADDR 0x40020800
+#define GPIOD_BASE_ADDR 0x40020C00
+#define DMA1_BASE_ADDR  0x40026000
+#define EXTI_BASE_ADDR  0x40013C00
+#define SPI1_BASE_ADDR  0x40013000
+#define RCC_BASE_ADDR   0x40023800
 
 
 typedef enum{
