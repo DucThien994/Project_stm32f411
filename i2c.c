@@ -46,6 +46,14 @@ void I2C_Init(void){
 
 void I2C_WriteData(void)
 {
+    uint32_t* I2C1_CR1    = (uint32_t*)(I2C1_BASE_ADDR + 0x00);
+    uint32_t* I2C1_SR1    = (uint32_t*)(I2C1_BASE_ADDR + 0x14);
+
+
+    //This bit is set and cleared by software and cleared by hardware when start is sent or PE=0.
+    *I2C1_CR1 |= 1 << 8; // start bit on bus wires 
+    *I2C1_SR1 |= 1 << 0; // start bit master mode
+
 
 }
 
