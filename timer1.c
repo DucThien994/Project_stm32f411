@@ -1,5 +1,6 @@
 #include "timer1.h"
 #include "gpio.h"
+#include <stdint.h>
 
 void Timer1_Init(void)
 {

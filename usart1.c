@@ -1,5 +1,6 @@
 #include "gpio.h"
 #include "usart1.h"
+#include <stdint.h>
 
 void Usart1_Init(void)
 {

@@ -1,4 +1,6 @@
 #include "i2c.h"
+#include <stdint.h>
+#include "gpio.h"
 
 /*
     I2C1 for LSM303AGR
@@ -33,9 +35,9 @@ void I2C_Init(void){
     *GPIOB_MODER |= (0b10 << 12);
     *GPIOB_MODER |= (0b10 << 18);
     *GPIOB_AFRL &= ~(0xF << 24);
-    *GPIOB_AFRL |= (0x0100 << 24);
+    *GPIOB_AFRL |= (0b0100 << 24);
     *GPIOB_AFRH &= ~(0xF << 4);
-    *GPIOB_AFRH |= (0x0100 << 4);
+    *GPIOB_AFRH |= (0b0100 << 4);
 
     *I2C1_CR2 &= ~(0b11111 << 0);
     *I2C1_CR2 |= (16 << 0);

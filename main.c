@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include "gpio.h"
 #include "usart1.h"
 #include "timer1.h"
