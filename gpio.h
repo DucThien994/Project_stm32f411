@@ -1,3 +1,5 @@
+#include <stdint.h>
+
 #define GPIOA_BASE_ADDR 0x40020000
 #define GPIOB_BASE_ADDR 0x40020400
 #define GPIOC_BASE_ADDR 0x40020800

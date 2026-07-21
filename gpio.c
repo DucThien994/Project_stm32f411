@@ -7,7 +7,7 @@ void Led_Init(void)
     uint32_t* RCC_AHB1ENR = (uint32_t*)(RCC_BASE_ADDR + 0x30);
     *RCC_AHB1ENR |= 1 << 3;
 
-    uint32_t* GPIOD_MODER = (uint32_t)(GPIOD_BASE_ADDR + 0x00);
+    uint32_t* GPIOD_MODER = (uint32_t*)(GPIOD_BASE_ADDR + 0x00);
     // reset PD12 TO PD15 
     *GPIOD_MODER &= (0xFF << 24);
 
@@ -19,7 +19,7 @@ void Led_Init(void)
     *RCC_APB2ENR |= 1 << 4;
 
     // PB6 PB7 TX RX
-    uint32_t* GPIOB_MODER = (uint32_t)(GPIOB_BASE_ADDR + 0x00);
+    uint32_t* GPIOB_MODER = (uint32_t*)(GPIOB_BASE_ADDR + 0x00);
     *GPIOB_MODER &= ~(0xF << 12);
     *GPIOB_MODER |= (0xA << 12); // set alternate function 0b1010
 
