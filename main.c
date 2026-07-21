@@ -1,6 +1,7 @@
 #include "gpio.h"
 #include "usart1.h"
 #include "timer1.h"
+#include "i2c.h"
 
 void SystemInit(void){
 

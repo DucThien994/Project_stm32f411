@@ -7,7 +7,7 @@
 #define DMA1_BASE_ADDR  0x40026000
 #define EXTI_BASE_ADDR  0x40013C00
 #define SPI1_BASE_ADDR  0x40013000
-#define RCC_BASE_ADDR   0x40023800
+#define RCC_BASE_ADDR  	0x40023800
 
 
 typedef enum{
