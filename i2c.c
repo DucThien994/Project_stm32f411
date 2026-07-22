@@ -80,7 +80,7 @@ void I2C_WriteData(uint8_t slave_reg_addr, uint8_t slave_reg_val)
     *I2C1_CR1 |= 1 << 9;
 }
 
-void I2C_ReadData(uint8_t slave_reg_addr)
+uint8_t I2C_ReadData(uint8_t slave_reg_addr)
 {
     uint32_t* I2C1_CR1 = (uint32_t*)(I2C1_BASE_ADDR + 0x00);
     *I2C1_CR1 |= 1 << 8;
@@ -91,10 +91,10 @@ void I2C_ReadData(uint8_t slave_reg_addr)
     *I2C1_DR = 0b00110010;
     while (((*I2C1_SR1 >> 1) &  1) == 0);
     uint32_t* I2C1_SR2 = (uint32_t*)(I2C1_BASE_ADDR + 0x18);
-    uint32_t* temp = *I2C1_SR2;
+    uint32_t temp = *I2C1_SR2;
 
     // check ack 
-    while (((**I2C1_SR1 >> 10) & 1) == 1);
+    while (((*I2C1_SR1 >> 10) & 1) == 1);
 
     //  send command frame
     *I2C1_DR = slave_reg_addr;
@@ -122,6 +122,4 @@ void I2C_ReadData(uint8_t slave_reg_addr)
     // stop bit 
     *I2C1_CR1 |= 1 << 9;
     return data;
-
-
 }
