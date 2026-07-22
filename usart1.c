@@ -1,5 +1,6 @@
 #include "gpio.h"
 #include "usart1.h"
+#include <stdint.h>
 
 void Usart1_Init(void)
 {
@@ -11,18 +12,17 @@ void Usart1_Init(void)
     uint32_t* USART1_CR1 = (uint32_t*)(USART1_BASE_ADDR + 0x0C);
     uint32_t* USART1_CR2 = (uint32_t*)(USART1_BASE_ADDR + 0x10);
 
-    *USART1_BRR = 0x683; 
+    *USART1_BRR = 0x683;
     *USART1_CR1 |= 1 << 12; // word length
-    *USART1_CR1 |= 1 << 9; // odd parity 
+    *USART1_CR1 |= 1 << 9; // odd parity
     *USART1_CR1 |= 1 << 10; // check parity enable
     *USART1_CR2 &= ~ (0b11 << 12); // stop bit
-    *USART1_CR1 |= 1 << 2; // enable receive 
-    *USART1_CR1 |= 1 << 3; // enable transmit 
+    *USART1_CR1 |= 1 << 2; // enable receive
+    *USART1_CR1 |= 1 << 3; // enable transmit
     *USART1_CR1 |= 1 << 5; // enable RXNE interrupt
     *USART1_CR1 |= 1 << 13; //enable usart
 
 }
-
 
 void USART_SendChar(char c)
 {

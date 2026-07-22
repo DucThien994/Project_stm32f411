@@ -1,17 +1,18 @@
 #include "gpio.h"
 #include <stdio.h>
+#include <stdint.h>
 
 void Led_Init(void)
 {
-    // CLOCK 
+    // CLOCK
     uint32_t* RCC_AHB1ENR = (uint32_t*)(RCC_BASE_ADDR + 0x30);
     *RCC_AHB1ENR |= 1 << 3;
 
-    uint32_t* GPIOD_MODER = (uint32_t)(GPIOD_BASE_ADDR + 0x00);
-    // reset PD12 TO PD15 
+    uint32_t* GPIOD_MODER = (uint32_t*)(GPIOD_BASE_ADDR + 0x00);
+    // reset PD12 TO PD15
     *GPIOD_MODER &= (0xFF << 24);
 
-    // set output pd12 to pd15 
+    // set output pd12 to pd15
     *GPIOD_MODER |= (0x55 << 24);
 
     // ===== config usart1 =====
@@ -19,7 +20,7 @@ void Led_Init(void)
     *RCC_APB2ENR |= 1 << 4;
 
     // PB6 PB7 TX RX
-    uint32_t* GPIOB_MODER = (uint32_t)(GPIOB_BASE_ADDR + 0x00);
+    uint32_t* GPIOB_MODER = (uint32_t*)(GPIOB_BASE_ADDR + 0x00);
     *GPIOB_MODER &= ~(0xF << 12);
     *GPIOB_MODER |= (0xA << 12); // set alternate function 0b1010
 
@@ -29,7 +30,7 @@ void Led_Init(void)
 }
 
 
-// control button 
+// control button
 void LedCtrl(led_t led, led_state_t state)
 {
 
@@ -38,13 +39,13 @@ void LedCtrl(led_t led, led_state_t state)
     {
         *GPIOD_ODR |= (1 << (led + 12));
     }
-    else 
+    else
     {
         *GPIOD_ODR &= ~(1 << (led + 12));
     }
 }
 
-// set PA0 -> button 
+// set PA0 -> button
 void Button_Init(void)
 {
  	uint32_t* RCC_AHB1ENR = (uint32_t*)(RCC_BASE_ADDR + 0x30);
@@ -53,7 +54,7 @@ void Button_Init(void)
 	uint32_t* GPIOA_MODER = (uint32_t*)(GPIOA_BASE_ADDR + 0x00);
 
 	// set nut nhan PA0 la input 00
-	*GPIOA_MODER &= ~(0b11 << 0);   
+	*GPIOA_MODER &= ~(0b11 << 0);
 }
 
 char Button_Get_State()
