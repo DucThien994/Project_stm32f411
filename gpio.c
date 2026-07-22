@@ -29,7 +29,6 @@ void Led_Init(void)
     // ===== end config usart1 =====
 }
 
-
 // control button
 void LedCtrl(led_t led, led_state_t state)
 {
