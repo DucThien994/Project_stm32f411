@@ -41,6 +41,22 @@ void Usart1_Init(void)
     *USART1_CR1 |= 1 << 5; // enable RXNE interrupt
     *USART1_CR1 |= 1 << 13; //enable usart
 
+    // enable NVIC
+    uint32_t* ISER1 = (uint32_t*)(0xE000E104);
+    *ISER1 |=  1 << 5; 
+ 
+}
+
+
+void USART1_IRQHandler(void)
+{
+    uint32_t* USART1_SR = (uint32_t*)(USART1_BASE_ADDR + 0x00);
+    uint32_t* USART1_DR = (uint32_t*)(USART1_BASE_ADDR + 0x04);
+
+    if (*USART1_SR & (1 << 5)) // RXNE: có byte mới
+    {
+        char c = (char)(*USART1_DR & 0xFF); // đọc DR sẽ tự clear RXNE (và PE/FE nếu có)
+    }
 }
 
 void USART_SendChar(char c)
