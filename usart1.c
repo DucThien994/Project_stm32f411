@@ -2,6 +2,25 @@
 #include "usart1.h"
 #include <stdint.h>
 
+void Usart1_Config(void)
+{
+    // enable clock
+    uint32_t* RCC_APB2ENR = (uint32_t*)(RCC_BASE_ADDR + 0x44);
+    *RCC_APB2ENR |= 1 << 4;
+    uint32_t* RCC_AHB1ENR = (uint32_t*)(RCC_BASE_ADDR + 0x30);
+    *RCC_AHB1ENR |= 1 << 1; 
+
+    // config function
+    uint32_t* GPIOB_MODER = (uint32_t*)(GPIOB_BASE_ADDR + 0x00);
+    uint32_t* GPIOB_AFRL = (uint32_t*)(GPIOB_BASE_ADDR + 0x20);
+
+    *GPIOB_MODER &= ~(0b1111 << 12);
+    *GPIOB_MODER |= (0b1010 << 12); // set alternate function for PB6 and PB7
+
+    *GPIOB_AFRL &= ~(0xFF << 24);
+    *GPIOB_AFRL |= (0x77 << 24); // set alternate function for PB6 and PB7
+}
+
 void Usart1_Init(void)
 {
     uint32_t* RCC_APB2ENR = (uint32_t*)(RCC_BASE_ADDR + 0x44);

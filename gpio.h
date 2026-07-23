@@ -4,11 +4,10 @@
 #define GPIOA_BASE_ADDR 0x40020000
 #define GPIOC_BASE_ADDR 0x40020800
 #define GPIOD_BASE_ADDR 0x40020C00
+#define GPIOE_BASE_ADDR 0x40021000
 #define DMA1_BASE_ADDR  0x40026000
 #define EXTI_BASE_ADDR  0x40013C00
-#define SPI1_BASE_ADDR  0x40013000
 #define RCC_BASE_ADDR  	0x40023800
-
 
 typedef enum{
 	// dat dung theo thu tu cua schematic
