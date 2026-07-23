@@ -29,7 +29,7 @@ void Spi1_Init(void){
     // alternate function for PA5, PA6, PA7
     uint32_t* GPIOA_AFRL = (uint32_t*)(GPIOA_BASE_ADDR + 0x20);
     *GPIOA_AFRL &= ~(0xFFF << 20);
-    *GPIOA_AFRL |= (0b0100 << 20) | (0b0100 << 24) | (0b0100 << 28);
+    *GPIOA_AFRL |= (0b0101 << 20) | (0b0101 << 24) | (0b0101 << 28);
     
     // pe3 output mode 
     *GPIOE_MODER &= ~(0b11 << 6);

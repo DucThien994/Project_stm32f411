@@ -12,6 +12,7 @@ void SystemInit(void){
 int main(void){
     
     Led_Init();
+    Usart1_Config();
     Usart1_Init();
     Timer1_Init();
     I2C_Init();
@@ -31,6 +32,13 @@ int main(void){
             LedCtrl(LED_GREEN, OFF_LED);
             LedCtrl(LED_ORANGE, OFF_LED);
             LedCtrl(LED_RED, OFF_LED);
+        }
+
+
+        if (time_cnt >= 1000)
+        {
+            time_cnt -= 1000;
+            USART_SendString("hello Harry Tim\n");
         }
 
     }

@@ -10,7 +10,7 @@ void Led_Init(void)
 
     uint32_t* GPIOD_MODER = (uint32_t*)(GPIOD_BASE_ADDR + 0x00);
     // reset PD12 TO PD15
-    *GPIOD_MODER &= (0xFF << 24);
+    *GPIOD_MODER &= ~(0xFF << 24);
 
     // set output pd12 to pd15
     *GPIOD_MODER |= (0x55 << 24);

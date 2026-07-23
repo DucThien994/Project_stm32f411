@@ -7,6 +7,8 @@ void Usart1_Config(void)
     // enable clock
     uint32_t* RCC_APB2ENR = (uint32_t*)(RCC_BASE_ADDR + 0x44);
     *RCC_APB2ENR |= 1 << 4;
+    uint32_t* RCC_AHB1ENR = (uint32_t*)(RCC_BASE_ADDR + 0x30);
+    *RCC_AHB1ENR |= 1 << 1; 
 
     // config function
     uint32_t* GPIOB_MODER = (uint32_t*)(GPIOB_BASE_ADDR + 0x00);

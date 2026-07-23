@@ -34,6 +34,7 @@ void I2C_Init(void){
     *GPIOB_MODER &= ~(0b11 << 18);
     *GPIOB_MODER |= (0b10 << 12);
     *GPIOB_MODER |= (0b10 << 18);
+    *GPIOB_OTYPER |= ((1 << 6) | (1 << 9)); // open-drain 
     *GPIOB_AFRL &= ~(0xF << 24);
     *GPIOB_AFRL |= (0b0100 << 24);
     *GPIOB_AFRH &= ~(0xF << 4);
@@ -42,7 +43,7 @@ void I2C_Init(void){
     *I2C1_CR2 &= ~(0b11111 << 0);
     *I2C1_CR2 |= (16 << 0);
     *I2C1_CCR &= ~(0xFFF << 0);
-    *I2C1_CCR |= (80 << 0); // 100MHz
+    *I2C1_CCR |= (80 << 0); // 100kHz
     *I2C1_CR1 |= (1 << 0); // enable peripheral 
 }
 
@@ -73,7 +74,7 @@ void I2C_WriteData(uint8_t slave_reg_addr, uint8_t slave_reg_val)
 
 
     // send write data 0b11000000
-    *I2C1_DR = 0b11000000;
+    *I2C1_DR = slave_reg_val;
     while (((*I2C1_SR1 >> 2) & 1) == 0);
 
     // generate stop bit
