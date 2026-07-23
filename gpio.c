@@ -14,19 +14,6 @@ void Led_Init(void)
 
     // set output pd12 to pd15
     *GPIOD_MODER |= (0x55 << 24);
-
-    // ===== config usart1 =====
-    uint32_t* RCC_APB2ENR = (uint32_t*)(RCC_BASE_ADDR + 0x44);
-    *RCC_APB2ENR |= 1 << 4;
-
-    // PB6 PB7 TX RX
-    uint32_t* GPIOB_MODER = (uint32_t*)(GPIOB_BASE_ADDR + 0x00);
-    *GPIOB_MODER &= ~(0xF << 12);
-    *GPIOB_MODER |= (0xA << 12); // set alternate function 0b1010
-
-    uint32_t* GPIOB_AFRL = (uint32_t*)(GPIOB_BASE_ADDR + 0x20);
-    *GPIOB_AFRL |= ((0x7 << 24) | (0x7 << 28));
-    // ===== end config usart1 =====
 }
 
 // control button
