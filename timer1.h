@@ -1,2 +1,5 @@
-#define TIM1_BASE_ADDR (*(volatile uint32_t*)(0x40010000)
-#define TIM2_BASE_ADDR (*(volatile uint32_t*)(0x40000000)
+#define TIM1_BASE_ADDR 0x40010000
+#define TIM2_BASE_ADDR 0x40000000
+
+extern volatile int time_cnt;
+void Timer1_Init(void);
