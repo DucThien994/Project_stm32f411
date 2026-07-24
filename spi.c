@@ -51,22 +51,20 @@ char Spi1_Read(char reg_addr){
     uint16_t* SPI1_DR = (uint16_t*)(SPI1_BASE_ADDR + 0x0C);
     uint16_t* SPI1_SR = (uint16_t*)(SPI1_BASE_ADDR + 0x08);
 
-    while(((*SPI1_SR >> 7) & 1) == 1);
     *SPI1_DR = reg_addr; 
-    char data = *SPI1_DR;
-
-    // - check tx buffer empty 
+    while(((*SPI1_SR >> 1) & 1) == 0); // wait TXE 
+    while(((*SPI1_SR >> 0) & 1) == 0); // wait RXNE
+    char dummy_data = *SPI1_DR;
+    
+    *SPI1_DR = 0xFF; // gửi dummy byte để cấp xung clock cho slave đẩy data
+    
     while(((*SPI1_SR >> 1) & 1) == 0); 
-    *SPI1_DR = 0xFF;
-
-    // - check spi busy 
-    while(((*SPI1_SR >> 7) & 1) == 1);
-
-    // check receiver buffer not empty
     while(((*SPI1_SR >> 0) & 1) == 0);
+    char data = *SPI1_DR; // real data 
 
-    data = *SPI1_DR;
-
+    // wait BSY = 0
+    while(((*SPI1_SR >> 7) & 1) == 1);
+    
     *GPIOE_ODR |= 1 << 3; // set pe3 high (inactive slave)
 
     return data;
@@ -76,27 +74,25 @@ char Spi1_Read(char reg_addr){
 
 void SPI1_Write(char reg_addr, char reg_val){
 
-    	uint32_t* GPIOE_ODR = (uint32_t*)(GPIOE_BASE_ADDR + 0x14);
+    uint32_t* GPIOE_ODR = (uint32_t*)(GPIOE_BASE_ADDR + 0x14);
 	*GPIOE_ODR &= ~(1<<3);	// set PE3 to LOW to active slave
 	uint16_t* SPI1_DR = (uint16_t*)(SPI1_BASE_ADDR + 0x0C);
 	uint16_t* SPI1_SR = (uint16_t*)(SPI1_BASE_ADDR + 0x08);
 
-	while(((*SPI1_SR >> 7)&1)==1);
+    // send address 
 	*SPI1_DR = reg_addr;
-	while(((*SPI1_SR >> 1)&1)==0);
-	while(((*SPI1_SR >> 7)&1)==1);
+	while(((*SPI1_SR >> 1) & 1) == 0);
+	while(((*SPI1_SR >> 0) & 1) == 0);
+    char dummy_data = *SPI1_DR; 
 
-	while(((*SPI1_SR >> 0)&1)==0);
-	char data = *SPI1_DR;
-
-
-	while(((*SPI1_SR >> 7)&1)==1);
+    // send value 
 	*SPI1_DR = reg_val;
-	while(((*SPI1_SR >> 1)&1)==0);
-	while(((*SPI1_SR >> 7)&1)==1);
+    while(((*SPI1_SR >> 1) & 1) == 0);
+	while(((*SPI1_SR >> 0) & 1) == 0);
+	dummy_data = *SPI1_DR;
 
-	while(((*SPI1_SR >> 0)&1)==0);
-	data = *SPI1_DR;
+    // wait SPI free
+	while(((*SPI1_SR >> 7)&1)==1);
 
 	*GPIOE_ODR |= (1<<3);	// set PE3 to HIGH to inactive slave
 

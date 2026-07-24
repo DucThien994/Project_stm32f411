@@ -9,6 +9,7 @@ void SystemInit(void){
 
 }
 
+volatile char check_data = 0;
 int main(void){
     
     Led_Init();
@@ -17,6 +18,10 @@ int main(void){
     Timer1_Init();
     //I2C_Init();
     Spi1_Init();
+
+
+    SPI1_Write(0x20, 0xAF);
+    check_data = Spi1_Read(0xA0);
     while(1)
     {
         if (Button_Get_State() == 1)
