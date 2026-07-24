@@ -5,3 +5,6 @@
 *.map
 *.bin
 *.hex
+
+# Editor
+.vscode/
