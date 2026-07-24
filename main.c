@@ -38,7 +38,7 @@ int main(void){
         if (time_cnt >= 1000)
         {
             time_cnt -= 1000;
-            USART_SendString("hello Harry Tim\n");
+            USART_SendString("hello Harry Tim! \r\n");
         }
 
     }
