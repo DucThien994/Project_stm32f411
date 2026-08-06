@@ -6,6 +6,7 @@
 //#include "i2c.h"
 #include "spi.h"
 #include "adc.h"
+#include "dma.h"
 
 void SystemInit(void){
 
@@ -24,7 +25,8 @@ int main(void){
 
 
     //SPI1_Write(0x0F, 0x80);
-    check_data = Spi1_Read(0x8F);
+    //check_data = Spi1_Read(0x8F);
+
     while(1)
     {
         if (Button_Get_State() == 1)

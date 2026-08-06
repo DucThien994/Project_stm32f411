@@ -1,13 +1,31 @@
 #include <stdint.h>
 
+// define base address 
 #define GPIOB_BASE_ADDR 0x40020400
 #define GPIOA_BASE_ADDR 0x40020000
 #define GPIOC_BASE_ADDR 0x40020800
 #define GPIOD_BASE_ADDR 0x40020C00
 #define GPIOE_BASE_ADDR 0x40021000
-#define DMA1_BASE_ADDR  0x40026000
 #define EXTI_BASE_ADDR  0x40013C00
 #define RCC_BASE_ADDR  	0x40023800
+
+// define bus clock register 
+#define RCC_AHB1ENR (*(volatile uint32_t*)(RCC_BASE_ADDR + 0x30))
+#define RCC_APB1ENR (*(volatile uint32_t*)(RCC_BASE_ADDR + 0x40))
+#define RCC_APB2ENR (*(volatile uint32_t*)(RCC_BASE_ADDR + 0x44))
+
+// define for gpio register
+#define GPIOA_MODER (*(volatile uint32_t*)(GPIOA_BASE_ADDR))
+#define GPIOB_MODER (*(volatile uint32_t*)(GPIOB_BASE_ADDR))
+#define GPIOC_MODER (*(volatile uint32_t*)(GPIOC_BASE_ADDR))
+#define GPIOD_MODER (*(volatile uint32_t*)(GPIOD_BASE_ADDR))
+
+#define GPIOA_IDR 	(*(volatile uint32_t*)(GPIOA_BASE_ADDR + 0x14))
+
+#define GPIOB_AFRL 	(*(volatile uint32_t*)(GPIOB_BASE_ADDR + 0x20))
+
+#define ISER0       (*(volatile uint32_t*)(0xE000E100))
+#define ISER1       (*(volatile uint32_t*)(0xE000E104))
 
 typedef enum{
 	// dat dung theo thu tu cua schematic
