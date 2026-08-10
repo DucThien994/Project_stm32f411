@@ -44,7 +44,6 @@ int main(void){
             LedCtrl(LED_RED, OFF_LED);
         }
 
-
     }
 
     return 0;

@@ -15,7 +15,6 @@
 
 #define ADC_CCR     (*(volatile uint32_t*)(ADC_COMMON_BASE_ADDR + 0x04))
 
-
 uint16_t ADC1_ReadRaw(void);
 void ADC1_TempSensor_Init(void);
 float ADC1_ReadTemperature(void);

@@ -22,20 +22,19 @@ void Usart1_Init(void)
 
     // config 
     USART1_BRR = 0x683;
+
     USART1_CR1 |= 1 << 12; // word length
     USART1_CR1 |= 1 << 9; // odd parity
     USART1_CR1 |= 1 << 10; // check parity enable
     USART1_CR2 &= ~ (0b11 << 12); // stop bit
     USART1_CR1 |= 1 << 2; // enable receive
     USART1_CR1 |= 1 << 3; // enable transmit
+    USART1_CR3 |= 1 << 7; //  DMAT =1 
     USART1_CR1 |= 1 << 5; // enable RXNE interrupt
     USART1_CR1 |= 1 << 13; //enable usart
-
-    // enable NVIC
-    ISER1 |=  1 << 5; 
+    ISER1 |=  1 << 5;   // NVIC enable 
 
 }
-
 
 void USART1_IRQHandler(void)
 {

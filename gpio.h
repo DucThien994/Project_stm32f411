@@ -11,7 +11,7 @@
 
 // define bus clock register 
 #define RCC_AHB1ENR (*(volatile uint32_t*)(RCC_BASE_ADDR + 0x30))
-#define RCC_APB1ENR (*(volatile uint32_t*)(RCC_BASE_ADDR + 0x40))
+#define RCC_APB2ENR (*(volatile uint32_t*)(RCC_BASE_ADDR + 0x40))
 #define RCC_APB2ENR (*(volatile uint32_t*)(RCC_BASE_ADDR + 0x44))
 
 // define for gpio register
@@ -33,6 +33,7 @@
 
 #define ISER0       	(*(volatile uint32_t*)(0xE000E100))
 #define ISER1       	(*(volatile uint32_t*)(0xE000E104))
+#define ISER2       	(*(volatile uint32_t*)(0xE000E108))
 
 #pragma once 
 typedef enum{
