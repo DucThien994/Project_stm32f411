@@ -11,7 +11,7 @@
 
 // define bus clock register 
 #define RCC_AHB1ENR (*(volatile uint32_t*)(RCC_BASE_ADDR + 0x30))
-#define RCC_APB2ENR (*(volatile uint32_t*)(RCC_BASE_ADDR + 0x40))
+#define RCC_APB1ENR (*(volatile uint32_t*)(RCC_BASE_ADDR + 0x40))
 #define RCC_APB2ENR (*(volatile uint32_t*)(RCC_BASE_ADDR + 0x44))
 
 // define for gpio register
@@ -28,6 +28,8 @@
 #define GPIOB_AFRL 		(*(volatile uint32_t*)(GPIOB_BASE_ADDR + 0x20))
 #define GPIOB_AFRH 		(*(volatile uint32_t*)(GPIOB_BASE_ADDR + 0x24))
 #define GPIOB_OTYPER 	(*(volatile uint32_t*)(GPIOB_BASE_ADDR + 0x20))
+
+#define GPIOD_ODR		(*(volatile uint32_t*)(GPIOD_BASE_ADDR + 0x14))
 
 #define GPIOE_ODR 		(*(volatile uint32_t*)(GPIOE_BASE_ADDR))
 
@@ -53,3 +55,4 @@ void Led_Init();
 void LedCtrl(led_t led, led_state_t state);
 void Button_Init();
 char Button_Get_State();
+void Led_on_off(uint8_t state);

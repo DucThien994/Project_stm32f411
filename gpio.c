@@ -15,15 +15,13 @@ void Led_Init(void)
 // control button
 void LedCtrl(led_t led, led_state_t state)
 {
-
-    uint32_t* GPIOD_ODR = (uint32_t*)(GPIOD_BASE_ADDR + 0x14);
     if (state == ON_LED)
     {
-        *GPIOD_ODR |= (1 << (led + 12));
+        GPIOD_ODR |= (1 << (led + 12));
     }
     else
     {
-        *GPIOD_ODR &= ~(1 << (led + 12));
+        GPIOD_ODR &= ~(1 << (led + 12));
     }
 }
 
@@ -38,4 +36,13 @@ char Button_Get_State()
 {
     if (((GPIOA_IDR >> 0) & 0x01) == 0x01) return 1;
     else return 0;
+}
+
+// led for usart1 
+void Led_on_off(uint8_t state){
+    if (state){
+        GPIOD_ODR |= (0xF << 12);  // led on
+    } else {
+        GPIOD_ODR &= ~(0xF << 12); // led off
+    }
 }

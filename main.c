@@ -12,6 +12,10 @@ void SystemInit(void){
 
 }
 
+int global_1 = 0;
+int global_2 = 10;
+const int global_3 = 20;
+
 volatile char check_data = 0;
 int main(void){
 
@@ -22,13 +26,12 @@ int main(void){
     //I2C_Init();
     Spi1_Init();
     ADC1_TempSensor_Init();
-
-
     //SPI1_Write(0x0F, 0x80);
     //check_data = Spi1_Read(0x8F);
 
     while(1)
     {
+
         if (Button_Get_State() == 1)
         {
             LedCtrl(LED_BLUE, ON_LED);
@@ -43,6 +46,9 @@ int main(void){
             LedCtrl(LED_ORANGE, OFF_LED);
             LedCtrl(LED_RED, OFF_LED);
         }
+
+        // adc gui uart 1s 
+        
 
     }
 

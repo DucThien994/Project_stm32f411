@@ -36,11 +36,27 @@ void Usart1_Init(void)
 
 }
 
+volatile char rx_char;
 void USART1_IRQHandler(void)
 {
     if (USART1_SR & (1 << 5)) // RXNE: có byte mới
     {
-        char c = (char)(USART1_DR & 0xFF); // đọc DR sẽ tự clear RXNE (và PE/FE nếu có)
+        rx_char = USART1_DR; // đọc dữ liệu từ thanh ghi dữ liệu        
+        
+        if (rx_char == '0') 
+        {
+            Led_on_off(0); // led off
+            USART_SendString("LED OFF\n");
+        }
+        else if (rx_char == '1')
+        {
+            Led_on_off(1); // led on
+            USART_SendString("LED ON\n");
+        }
+        else{
+            USART_SendString("Invalid command\n");
+        }
+
     }
 }
 
