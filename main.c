@@ -12,13 +12,15 @@ void SystemInit(void){
 
 }
 
+int acb;
 int global_1 = 0;
 int global_2 = 10;
 const int global_3 = 20;
-
 volatile char check_data = 0;
-int main(void){
 
+int main(void){
+    int haha;
+    int bd = 0;
     Led_Init();
     Usart1_Config();
     Usart1_Init();
@@ -28,6 +30,16 @@ int main(void){
     ADC1_TempSensor_Init();
     //SPI1_Write(0x0F, 0x80);
     //check_data = Spi1_Read(0x8F);
+    
+    acb = 10;
+    haha = 50;
+    printf("bd = %d\n", bd);
+    printf("haha = %d\n", haha);
+    printf("acb = %d\n", acb);
+    printf("check_data = %d\n", check_data);
+    printf("global_1 = %d\n", global_1);
+    printf("global_2 = %d\n", global_2);
+    printf("global_3 = %d\n", global_3);
 
     while(1)
     {
