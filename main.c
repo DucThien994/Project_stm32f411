@@ -30,6 +30,7 @@ int main(void){
     //I2C_Init();
     Spi1_Init();
     ADC1_TempSensor_Init();
+    DMA2_USART1_TX_Init();
     //SPI1_Write(0x0F, 0x80);
     //check_data = Spi1_Read(0x8F);
     
@@ -63,8 +64,8 @@ int main(void){
 
         // read temp
         float temperature = ADC1_ReadTemperature();
-        DMA2_USART1_TX_Send((uint8_t *)tx_msg, len);
         int len = snprintf(tx_msg, sizeof(tx_msg), "Temperature of stm32f411: %.2f C\r\n", temperature);
+        DMA2_USART1_TX_Send((uint8_t *)tx_msg, len);
         for (volatile int i = 0; i < 1000000; i++);
 
     }
