@@ -18,6 +18,8 @@ int global_2 = 10;
 const int global_3 = 20;
 volatile char check_data = 0;
 
+char tx_msg[64] = {0};
+
 int main(void){
     int haha;
     int bd = 0;
@@ -58,6 +60,11 @@ int main(void){
             LedCtrl(LED_ORANGE, OFF_LED);
             LedCtrl(LED_RED, OFF_LED);
         }
+
+        // read temp
+        float temperature = ADC1_ReadTemperature();
+        int len = sprintf(tx_msg, sizeof(tx_msg), "Temperature of stm32f411: %.2f C\r\n", temperature);
+        for (volatile int i = 0; i < 1000000; i++);
 
     }
 

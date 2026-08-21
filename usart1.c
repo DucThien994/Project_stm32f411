@@ -28,7 +28,7 @@ void Usart1_Init(void)
     USART1_CR2 &= ~ (0b11 << 12); // stop bit
     USART1_CR1 |= 1 << 2; // enable receive
     USART1_CR1 |= 1 << 3; // enable transmit
-    USART1_CR3 |= 1 << 7; //  DMAT =1 
+    USART1_CR3 |= 1 << 7; //  DMAT = 1 | DMA transmit
     USART1_CR1 |= 1 << 5; // enable RXNE interrupt
     USART1_CR1 |= 1 << 13; //enable usart
     ISER1 |=  1 << 5;   // NVIC enable 
