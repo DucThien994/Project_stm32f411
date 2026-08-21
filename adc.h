@@ -1,3 +1,6 @@
+#ifndef ADC_H
+#define ADC_H
+
 #include <stdint.h>
 
 #define ADC1_BASE_ADDR        0x40012000
@@ -18,3 +21,5 @@
 uint16_t ADC1_ReadRaw(void);
 void ADC1_TempSensor_Init(void);
 float ADC1_ReadTemperature(void);
+
+#endif 

@@ -1,3 +1,6 @@
+#ifndef GPIO_H
+#define GPIO_H
+
 #include <stdint.h>
 
 // define base address 
@@ -56,3 +59,5 @@ void LedCtrl(led_t led, led_state_t state);
 void Button_Init();
 char Button_Get_State();
 void Led_on_off(uint8_t state);
+
+#endif
