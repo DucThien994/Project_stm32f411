@@ -23,7 +23,7 @@ void Usart1_Init(void)
     // config 
     USART1_BRR = 0x683; // if baudrate = 11520 -> 0x8A
 
-    USART1_CR1 |= 1 << 12; // word length
+    USART1_CR1 &= ~(1 << 12); // word length = 8 bit
     USART1_CR1 &= ~(1 << 10); // check parity enable
     USART1_CR2 &= ~ (0b11 << 12); // stop bit
     USART1_CR1 |= 1 << 2; // enable receive

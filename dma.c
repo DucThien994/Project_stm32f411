@@ -20,20 +20,20 @@ void DMA2_USART1_TX_Init(void) {
   DMA2_HIFCR |= (0xF << 24);
 
   // config S7CR 
-  DMA2_S7CR |= (4 << 25); // channel 5 : 101 
+  DMA2_S7CR |= (4 << 25); // channel 4 : 101 
   DMA2_S7CR |= 1 << 6;     // 01 -> memory-to-peripheral
   DMA2_S7CR |= 1 << 10;   // MINC : memory increment mode 
   DMA2_S7CR |= 1 << 4;    // tranfer complete interrupt enable   
 
   // data reg usart1
-  DMA2_S7AR = (uint32_t)(USART1_BASE_ADDR + 0x04); 
+  DMA2_S7PAR = (uint32_t)(USART1_BASE_ADDR + 0x04); 
 
   // enable NVIC
   ISER2 |= (1 << (70 - 64)); 
 
 }
 
-void DMA2_USART1_TX_Send(uint8_t *src_addr, uint16_t lenght) {
+void DMA2_USART1_TX_Send(uint8_t *src_addr, uint16_t length) {
 
   while (DMA2_S7CR & (1 << 0)); // wait until disable finish 
   dma_tx_busy = 1;
@@ -51,11 +51,11 @@ void DMA2_USART1_TX_Send(uint8_t *src_addr, uint16_t lenght) {
   DMA2_S7NDTR = length;
 
   // enable STREAM DMA to start
-  DMA2_S7SR |= 1 << 0;
+  DMA2_S7CR |= 1 << 0;
 
 }
 
-void DMA2_USART1_IsBusy(void){
+uint8_t DMA2_USART1_IsBusy(void){
   return dma_tx_busy; 
 }
 
