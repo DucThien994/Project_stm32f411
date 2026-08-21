@@ -63,7 +63,8 @@ int main(void){
 
         // read temp
         float temperature = ADC1_ReadTemperature();
-        int len = sprintf(tx_msg, sizeof(tx_msg), "Temperature of stm32f411: %.2f C\r\n", temperature);
+        DMA2_USART1_TX_Send((uint8_t *)tx_msg, len);
+        int len = snprintf(tx_msg, sizeof(tx_msg), "Temperature of stm32f411: %.2f C\r\n", temperature);
         for (volatile int i = 0; i < 1000000; i++);
 
     }
