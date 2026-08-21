@@ -59,9 +59,6 @@ int main(void){
             LedCtrl(LED_RED, OFF_LED);
         }
 
-        // adc gui uart 1s 
-        
-
     }
 
     return 0;
