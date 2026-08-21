@@ -21,11 +21,10 @@ void Usart1_Init(void)
     RCC_APB2ENR |= 1 << 4;
 
     // config 
-    USART1_BRR = 0x683;
+    USART1_BRR = 0x683; // if baudrate = 11520 -> 0x8A
 
     USART1_CR1 |= 1 << 12; // word length
-    USART1_CR1 |= 1 << 9; // odd parity
-    USART1_CR1 |= 1 << 10; // check parity enable
+    USART1_CR1 &= ~(1 << 10); // check parity enable
     USART1_CR2 &= ~ (0b11 << 12); // stop bit
     USART1_CR1 |= 1 << 2; // enable receive
     USART1_CR1 |= 1 << 3; // enable transmit
